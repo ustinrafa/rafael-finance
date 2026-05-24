@@ -64,63 +64,29 @@
   .card-action { font-size: 12px; color: #185FA5; cursor: pointer; user-select: none; }
   .card-action:hover { text-decoration: underline; }
 
-  /* BUDGET & BARS */
-  .bar-item { margin-bottom: 12px; }
-  .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: #666; margin-bottom: 4px; }
-  .bar-track { background: #f0f0ee; border-radius: 99px; height: 6px; overflow: hidden; }
-  .bar-fill { height: 100%; border-radius: 99px; transition: width 0.3s ease; }
-  
-  /* TRANSACTION ITEMS */
+  /* TXN LIST */
   .txn-list-container { max-height: 320px; overflow-y: auto; }
   .txn-item { display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 0.5px solid #e0e0d8; }
-  .txn-item:last-child { border-bottom: none; }
-  .txn-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .txn-info { flex: 1; }
   .txn-name { font-size: 13px; font-weight: 500; color: #1a1a1a; }
-  .txn-date { font-size: 11px; color: #888; margin-top: 1px; }
+  .txn-date { font-size: 11px; color: #888; }
   .txn-amount { font-size: 13px; font-weight: 500; text-align: right; }
   .amount-out { color: #A32D2D; }
   .amount-in { color: #0F6E56; }
-  
-  .btn-delete { background: none; border: none; color: #ccc; cursor: pointer; padding: 4px; border-radius: 4px; display: flex; align-items: center; justify-content: center; transition: color 0.15s; }
-  .btn-delete:hover { color: #A32D2D; background: #FCEBEB; }
 
-  /* PILLS & BADGES */
+  /* PILLS */
   .pill { font-size: 11px; padding: 2px 8px; border-radius: 99px; font-weight: 500; }
   .pill-success { background: #EAF3DE; color: #3B6D11; }
-  .pill-warning { background: #FAEEDA; color: #854F0B; }
   .pill-danger { background: #FCEBEB; color: #A32D2D; }
-  
-  .logout-btn { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #888; cursor: pointer; padding: 8px 10px; border-radius: 8px; margin-top: auto; }
-  .logout-btn:hover { background: #FCEBEB; color: #A32D2D; }
 
   /* MODAL */
-  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 100; opacity: 0; transition: opacity 0.2s ease; }
-  .modal-overlay.active { display: flex; opacity: 1; }
-  .modal-card { background: #fff; width: 350px; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 24px rgba(0,0,0,0.12); transform: translateY(-20px); transition: transform 0.2s ease; }
-  .modal-overlay.active .modal-card { transform: translateY(0); }
-  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; font-weight: 500; font-size: 15px; color: #1a1a1a; }
-  .close-btn { cursor: pointer; color: #888; font-size: 18px; padding: 4px; border-radius: 4px; }
-  .close-btn:hover { color: #A32D2D; background: #f5f5f3; }
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); justify-content: center; align-items: center; z-index: 100; }
+  .modal-overlay.active { display: flex; }
+  .modal-card { background: #fff; width: 350px; border-radius: 12px; padding: 1.5rem; }
 
-  /* TABLE VIEW FOR FULL TRANSACTIONS */
-  .full-table { width: 100%; border-collapse: collapse; margin-top: 1rem; background: #fff; border-radius: 8px; overflow: hidden; font-size: 13px; border: 0.5px solid #e0e0d8; }
-  .full-table th { background: #f8f9fa; text-align: left; padding: 12px; font-weight: 500; color: #666; border-bottom: 0.5px solid #e0e0d8; }
-  .full-table td { padding: 12px; border-bottom: 0.5px solid #e0e0d8; color: #1a1a1a; }
-  .full-table tr:last-child td { border-bottom: none; }
-
-  /* SAVINGS TARGET PROGRESS */
-  .saving-box { border: 0.5px solid #e0e0d8; padding: 1rem; border-radius: 8px; margin-bottom: 12px; background: #f8f9fa; }
-
-  @media (max-width: 768px) {
-    .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; flex-wrap: wrap; padding: 0.75rem; border-right: none; border-bottom: 0.5px solid #e0e0d8; }
-    .main { margin-left: 0; padding: 1rem; width: 100%; }
-    .metrics { grid-template-columns: 1fr; }
-    .grid2 { grid-template-columns: 1fr; }
-    .logo { margin-bottom: 0; margin-right: auto; }
-    .logout-btn { margin-top: 0; }
-    .nav-item span { display: none; }
-  }
+  /* TABLE */
+  .full-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .full-table th, .full-table td { padding: 12px; border-bottom: 0.5px solid #e0e0d8; text-align: left; }
 </style>
 </head>
 <body>
@@ -128,15 +94,14 @@
 <div id="loginScreen" class="screen active login-wrap">
   <div class="login-card">
     <div class="login-logo"><i class="ti ti-home-2"></i> Rafael's Finance</div>
-    <div class="login-sub">Masuk untuk kelola keuangan keluarga</div>
     <div class="field">
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Masukkan username" autocomplete="username" />
+      <label>Username</label>
+      <input type="text" id="username" placeholder="Masukkan username" />
     </div>
     <div class="field">
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Masukkan password" autocomplete="current-password" />
-      <div class="error-msg" id="errMsg">Username atau password salah. Coba lagi.</div>
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Masukkan password" />
+      <div id="errMsg" style="color:#A32D2D; font-size:12px; display:none; margin-top:5px;">Username/password salah.</div>
     </div>
     <button class="btn-login" onclick="doLogin()">Masuk</button>
   </div>
@@ -147,426 +112,82 @@
     <div class="logo"><i class="ti ti-home-2"></i> Rafael's Finance</div>
     <div class="nav-item active" onclick="switchTab('dashboard', this)"><i class="ti ti-layout-dashboard"></i> <span>Dashboard</span></div>
     <div class="nav-item" onclick="switchTab('transaksi', this)"><i class="ti ti-arrows-exchange"></i> <span>Transaksi</span></div>
-    <div class="nav-item" onclick="switchTab('anggaran', this)"><i class="ti ti-chart-pie"></i> <span>Anggaran</span></div>
-    <div class="nav-item" onclick="switchTab('tabungan', this)"><i class="ti ti-target"></i> <span>Tabungan</span></div>
-    <div class="nav-item" onclick="switchTab('laporan', this)"><i class="ti ti-report"></i> <span>Laporan</span></div>
-    <div class="nav-item" onclick="switchTab('arsip', this)"><i class="ti ti-file-spreadsheet"></i> <span>Arsip Keuangan</span></div>
-    <div class="logout-btn" onclick="doLogout()"><i class="ti ti-logout"></i> Keluar</div>
+    <div class="nav-item" onclick="switchTab('arsip', this)"><i class="ti ti-archive"></i> <span>Arsip Keuangan</span></div>
+    <div onclick="doLogout()" style="cursor:pointer; font-size:12px; color:#888; margin-top:auto; padding:8px;"><i class="ti ti-logout"></i> Keluar</div>
   </div>
 
   <div class="main">
-    
-    <div class="header">
-      <div>
-        <div id="currentMonthYear" style="font-size:18px;font-weight:500;color:#1a1a1a;">Mei 2026</div>
-        <div class="header-sub">Selamat datang, Rafael's Finance 👋</div>
-      </div>
-      <button class="btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Catat transaksi baru</button>
-    </div>
-
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-label"><i class="ti ti-wallet"></i> Sisa Saldo Bulan Ini</div>
-        <div class="metric-value" id="metric-balance">Rp 0</div>
-        <div class="metric-delta delta-up" id="metric-balance-sub"><i class="ti ti-trending-up"></i> Uang tersedia</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label"><i class="ti ti-arrow-down"></i> Pengeluaran Bulan Ini</div>
-        <div class="metric-value" id="metric-expense">Rp 0</div>
-        <div class="metric-delta delta-down" id="metric-expense-sub"><i class="ti ti-trending-up"></i> Berdasarkan anggaran</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label"><i class="ti ti-piggy-bank"></i> Ditabung Bulan Ini</div>
-        <div class="metric-value" id="metric-savings">Rp 0</div>
-        <div class="metric-delta delta-up" id="metric-savings-sub"><i class="ti ti-check"></i> Konsisten & aman</div>
-      </div>
-    </div>
-
     <div id="tab-dashboard" class="content-section active">
-      
-      <div class="card" style="margin-bottom: 12px;">
-        <div class="card-title">Tren Historis Arus Kas (Berdasarkan Data Asli)</div>
-        <div style="position: relative; height: 220px; width: 100%; display: flex; justify-content: center;">
-          <canvas id="financeChart"></canvas>
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <div class="card-title">Pencatatan Terbaru <span class="card-action" onclick="goToTabViaLink(1)">Lihat semua</span></div>
-          <div id="dashboard-txn-list" class="txn-list-container">
-            </div>
-        </div>
-        
-        <div class="card">
-          <div class="card-title">Pemakaian Anggaran Baru <span class="card-action" onclick="goToTabViaLink(2)">Atur anggaran</span></div>
-          <div id="dashboard-budget-list">
-            </div>
-        </div>
-      </div>
+      <div class="card"><div class="card-title">Tren Historis Arus Kas</div><div style="height:200px;"><canvas id="financeChart"></canvas></div></div>
     </div>
 
     <div id="tab-transaksi" class="content-section">
       <div class="card">
-        <div class="card-title">Semua Riwayat Transaksi Manual</div>
-        <div style="overflow-x: auto;">
-          <table class="full-table">
-            <thead>
-              <tr>
-                <th>Tanggal</th>
-                <th>Nama Transaksi</th>
-                <th>Kategori</th>
-                <th>Jenis</th>
-                <th style="text-align: right;">Nominal</th>
-                <th style="text-align: center; width: 50px;">Aksi</th>
-              </tr>
-            </thead>
-            <tbody id="full-txn-table-body">
-              </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-anggaran" class="content-section">
-      <div class="card">
-        <div class="card-title">Detail Alokasi Anggaran Bulanan</div>
-        <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Sistem memantau pemakaian dana Anda berdasarkan kategori aktual kehidupan Anda.</p>
-        <div id="full-budget-management-list">
-          </div>
-      </div>
-    </div>
-
-    <div id="tab-tabungan" class="content-section">
-      <div class="card">
-        <div class="card-title">Target Tabungan Masa Depan</div>
-        
-        <div class="saving-box">
-          <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:500; margin-bottom: 6px;">
-            <span>Dana Darurat (Jago)</span>
-            <span style="color:#185FA5">25% Tercapai</span>
-          </div>
-          <div class="bar-track" style="height:10px; margin-bottom:8px;"><div class="bar-fill" style="width:25%; background:#185FA5;"></div></div>
-          <div style="font-size:12px; color:#666;">Terkumpul: <b>Rp 5.000.000</b> dari target Rp 20.000.000</div>
-        </div>
-
-        <div class="saving-box">
-          <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:500; margin-bottom: 6px;">
-            <span>Tabungan Pribadi (BCA)</span>
-            <span style="color:#1D9E75">45% Tercapai</span>
-          </div>
-          <div class="bar-track" style="height:10px; margin-bottom:8px;"><div class="bar-fill" style="width:45%; background:#1D9E75;"></div></div>
-          <div style="font-size:12px; color:#666;">Terkumpul: <b>Rp 9.000.000</b> dari target Rp 20.000.000</div>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-laporan" class="content-section">
-      <div class="card">
-        <div class="card-title">Ringkasan Arus Kas Bulan Ini</div>
-        <div style="padding: 1rem 0; line-height: 1.6; font-size: 14px;">
-          <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
-            <span>Total Pemasukan Bulan Ini</span>
-            <span style="color:#0F6E56; font-weight:bold;" id="report-total-in">Rp 0</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
-            <span>Total Pengeluaran Bulan Ini</span>
-            <span style="color:#A32D2D; font-weight:bold;" id="report-total-out">Rp 0</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
-            <span>Total Alokasi Tabungan</span>
-            <span style="color:#185FA5; font-weight:bold;" id="report-total-save">Rp 0</span>
-          </div>
-          <div style="display:flex; justify-content:space-between; padding: 12px 0; font-size: 16px; font-weight:bold;">
-            <span>Surplus / Sisa Saldo (Bulan Ini)</span>
-            <span id="report-net-status">Rp 0</span>
-          </div>
-        </div>
+        <button onclick="exportToExcel()" class="btn-primary" style="margin-bottom:10px;"><i class="ti ti-file-spreadsheet"></i> Unduh Transaksi ke Excel</button>
+        <table class="full-table" id="txn-table">
+          <tbody id="full-txn-table-body"></tbody>
+        </table>
       </div>
     </div>
 
     <div id="tab-arsip" class="content-section">
       <div class="card">
-        <div class="card-title">Arsip Keuangan Rekap Tahunan <i class="ti ti-table"></i></div>
-        <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Data sesuai spreadsheet Anda. Catatan baru tahun 2026 akan terakumulasi otomatis di sini.</p>
-        
-        <div style="overflow-x: auto;">
-          <table class="full-table">
-            <thead>
-              <tr>
-                <th>Tahun</th>
-                <th>Total Pemasukan</th>
-                <th>Total Pengeluaran</th>
-                <th>Total Ditabung</th>
-                <th style="text-align: right;">Surplus Bersih</th>
-                <th style="text-align: center; width: 100px;">Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="background-color: #fafbfc;">
-                <td style="font-weight:600; color:#185FA5;">2026 (Berjalan)</td>
-                <td id="arsip-2026-in" style="color:#0F6E56; font-weight:500;">Rp 56.047.003</td>
-                <td id="arsip-2026-out" style="color:#A32D2D; font-weight:500;">Rp 38.173.596</td>
-                <td id="arsip-2026-save" style="color:#185FA5; font-weight:500;">Rp 0</td>
-                <td id="arsip-2026-surplus" style="text-align: right; font-weight:600;">+Rp 17.873.407</td>
-                <td id="arsip-2026-status" style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600;">2025</td>
-                <td style="color:#0F6E56;">Rp 104.140.409</td>
-                <td style="color:#A32D2D;">Rp 93.331.543</td>
-                <td style="color:#185FA5;">Rp 0</td>
-                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 10.808.866</td>
-                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600;">2024</td>
-                <td style="color:#0F6E56;">Rp 106.616.946</td>
-                <td style="color:#A32D2D;">Rp 96.219.868</td>
-                <td style="color:#185FA5;">Rp 0</td>
-                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 10.397.078</td>
-                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
-              </tr>
-              <tr>
-                <td style="font-weight:600;">2023 (Sept)</td>
-                <td style="color:#0F6E56;">Rp 42.033.519</td>
-                <td style="color:#A32D2D;">Rp 35.928.045</td>
-                <td style="color:#185FA5;">Rp 0</td>
-                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 6.105.474</td>
-                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <button onclick="exportToExcel()" class="btn-primary" style="margin-bottom:10px;"><i class="ti ti-file-spreadsheet"></i> Unduh Rekap ke Excel</button>
+        <table class="full-table" id="arsip-table">
+          <thead><tr><th>Tahun</th><th>Pemasukan</th><th>Pengeluaran</th><th>Status</th></tr></thead>
+          <tbody id="arsip-body"></tbody>
+        </table>
       </div>
     </div>
-
-  </div>
-</div>
-
-<div id="txnModal" class="modal-overlay">
-  <div class="modal-card">
-    <div class="modal-header">
-      <span>Catat Transaksi Baru</span>
-      <i class="ti ti-x close-btn" onclick="closeModal()"></i>
-    </div>
-    <div class="field">
-      <label for="txnType">Jenis Transaksi</label>
-      <select id="txnType" onchange="toggleCategoryDropdown()">
-        <option value="out">Pengeluaran</option>
-        <option value="in">Pemasukan</option>
-        <option value="save">Simpan ke Tabungan</option>
-      </select>
-    </div>
-    <div class="field">
-      <label for="txnName">Nama Keterangan</label>
-      <input type="text" id="txnName" placeholder="Contoh: Belanja mingguan, Bonus, dll" />
-    </div>
-    <div class="field">
-      <label for="txnCategory">Kategori Alokasi</label>
-      <select id="txnCategory">
-        </select>
-    </div>
-    <div class="field">
-      <label for="txnAmount">Nominal Uang (Rp)</label>
-      <input type="number" id="txnAmount" placeholder="Contoh: 150000" />
-    </div>
-    <button class="btn-login" onclick="saveTxn()">Simpan ke Pembukuan</button>
   </div>
 </div>
 
 <script>
-  let myChart = null;
-
-  const BUDGET_LIMITS = {
-    "Cicilan & Hutang": 5500000,
-    "Kebutuhan Keluarga": 3000000,
-    "Langganan & Online": 500000,
-    "Kendaraan Bermotor": 500000,
-    "Lain-lain": 500000
-  };
-
-  const initialData = [
-    { id: 1, type: 'in', name: 'Pemasukan Mei', category: 'Gaji & Bonus', amount: 10011889, date: '01 Mei 2026' },
-    { id: 2, type: 'out', name: 'Rayver (Anak)', category: 'Kebutuhan Keluarga', amount: 2000000, date: '05 Mei 2026' },
-    { id: 3, type: 'out', name: 'Yessica (Istri)', category: 'Kebutuhan Keluarga', amount: 500000, date: '05 Mei 2026' },
-    { id: 4, type: 'out', name: 'Mbak Windy', category: 'Kebutuhan Keluarga', amount: 100000, date: '05 Mei 2026' },
-    { id: 5, type: 'out', name: 'Pengadaian (Yessica)', category: 'Cicilan & Hutang', amount: 1500000, date: '10 Mei 2026' },
-    { id: 6, type: 'out', name: 'Kredivo Yesi', category: 'Cicilan & Hutang', amount: 1334670, date: '10 Mei 2026' },
-    { id: 7, type: 'out', name: 'CC BCA (Eki)', category: 'Cicilan & Hutang', amount: 1000000, date: '15 Mei 2026' },
-    { id: 8, type: 'out', name: 'CC Jenius (Eki)', category: 'Cicilan & Hutang', amount: 700000, date: '15 Mei 2026' },
-    { id: 9, type: 'out', name: 'Paylater Tiktok, Gopay', category: 'Cicilan & Hutang', amount: 598611, date: '15 Mei 2026' },
-    { id: 10, type: 'out', name: 'Pajak Mobil (8x)', category: 'Kendaraan Bermotor', amount: 230000, date: '20 Mei 2026' },
-    { id: 11, type: 'out', name: 'Bensin Mobil', category: 'Kendaraan Bermotor', amount: 150000, date: '20 Mei 2026' },
-    { id: 12, type: 'out', name: 'Bensin Motor', category: 'Kendaraan Bermotor', amount: 50000, date: '20 Mei 2026' },
-    { id: 13, type: 'out', name: 'iCloud', category: 'Langganan & Online', amount: 169000, date: '22 Mei 2026' },
-    { id: 14, type: 'out', name: 'Kuota byU & im3', category: 'Langganan & Online', amount: 100000, date: '22 Mei 2026' },
-    { id: 15, type: 'out', name: 'Netflix', category: 'Langganan & Online', amount: 46500, date: '22 Mei 2026' },
-    { id: 16, type: 'save', name: 'Tabungan Emas (Tring!)', category: 'Tabungan', amount: 150000, date: '25 Mei 2026' }
-  ];
-
-  let transactions = JSON.parse(localStorage.getItem('rafael_txns_v4')) || [];
-  if (transactions.length === 0) {
-    transactions = initialData;
-    localStorage.setItem('rafael_txns_v4', JSON.stringify(transactions));
+  function exportToExcel() {
+    // Mencari tabel aktif
+    const activeTable = document.querySelector('.content-section.active .full-table');
+    if (!activeTable) return;
+    
+    let html = activeTable.outerHTML;
+    let url = 'data:application/vnd.ms-excel,' + encodeURIComponent(html);
+    let link = document.createElement('a');
+    link.download = 'Laporan_Keuangan_Rafael.xls';
+    link.href = url;
+    link.click();
   }
 
   function doLogin() {
-    const u = document.getElementById('username').value.trim();
-    const p = document.getElementById('password').value.trim();
-    const err = document.getElementById('errMsg');
-    if (u === 'rafael' && p === '231420') {
-      err.classList.remove('show');
+    if (document.getElementById('username').value === 'rafael' && document.getElementById('password').value === '231420') {
       document.getElementById('loginScreen').classList.remove('active');
       document.getElementById('dashScreen').classList.add('active');
       calculateEverything();
     } else {
-      err.classList.add('show');
+      document.getElementById('errMsg').style.display = 'block';
     }
   }
 
   function doLogout() {
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
     document.getElementById('dashScreen').classList.remove('active');
     document.getElementById('loginScreen').classList.add('active');
   }
 
-  function toggleCategoryDropdown() {
-    const type = document.getElementById('txnType').value;
-    const catSelect = document.getElementById('txnCategory');
-    catSelect.innerHTML = '';
-    if (type === 'out') {
-      catSelect.innerHTML = `<option value="Cicilan & Hutang">Cicilan & Hutang</option><option value="Kebutuhan Keluarga">Kebutuhan Keluarga</option><option value="Langganan & Online">Langganan & Online</option><option value="Kendaraan Bermotor">Kendaraan Bermotor</option><option value="Lain-lain">Lain-lain</option>`;
-      catSelect.disabled = false;
-    } else if (type === 'in') {
-      catSelect.innerHTML = `<option value="Gaji & Bonus">Gaji / Pendapatan</option><option value="Lain-lain">Lain-lain</option>`;
-      catSelect.disabled = false;
-    } else {
-      catSelect.innerHTML = `<option value="Tabungan">Alokasi Simpanan</option>`;
-      catSelect.disabled = true;
-    }
-  }
-
-  function openModal() {
-    document.getElementById('txnModal').classList.add('active');
-    toggleCategoryDropdown();
-  }
-
-  function closeModal() {
-    document.getElementById('txnModal').classList.remove('active');
-  }
-
-  function switchTab(tabId, element) {
-    const items = document.querySelectorAll('.nav-item');
-    items.forEach(i => i.classList.remove('active'));
-    element.classList.add('active');
-    const sections = document.querySelectorAll('.content-section');
-    sections.forEach(s => s.classList.remove('active'));
+  function switchTab(tabId, el) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
   }
 
-  function goToTabViaLink(index) {
-    const navItems = document.querySelectorAll('.nav-item');
-    if(navItems[index]) navItems[index].click();
-  }
-
-  function formatIDR(num) {
-    return 'Rp ' + new Intl.NumberFormat('id-ID').format(num);
-  }
-
   function calculateEverything() {
-    let totalIn = 0; let totalOut = 0; let totalSave = 0;
-    const categorySpent = { "Cicilan & Hutang": 0, "Kebutuhan Keluarga": 0, "Langganan & Online": 0, "Kendaraan Bermotor": 0, "Lain-lain": 0 };
-
-    transactions.forEach(txn => {
-      const amt = parseInt(txn.amount) || 0;
-      if (txn.type === 'in') { totalIn += amt; }
-      else if (txn.type === 'out') { totalOut += amt; if(categorySpent[txn.category] !== undefined) categorySpent[txn.category] += amt; }
-      else if (txn.type === 'save') { totalSave += amt; }
-    });
-
-    document.getElementById('metric-balance').innerText = formatIDR(totalIn - totalOut - totalSave);
-    document.getElementById('metric-expense').innerText = formatIDR(totalOut);
-    document.getElementById('metric-savings').innerText = formatIDR(totalSave);
-
-    const base2026In = 56047003; const base2026Out = 38173596; const base2026Save = 0;
-    const c2026In = base2026In + totalIn; const c2026Out = base2026Out + totalOut; const c2026Save = base2026Save + totalSave;
-    const c2026Surplus = c2026In - c2026Out - c2026Save;
-
-    document.getElementById('arsip-2026-in').innerText = formatIDR(c2026In);
-    document.getElementById('arsip-2026-out').innerText = formatIDR(c2026Out);
-    document.getElementById('arsip-2026-save').innerText = formatIDR(c2026Save);
-    document.getElementById('arsip-2026-surplus').innerText = (c2026Surplus >= 0 ? '+' : '') + formatIDR(c2026Surplus);
-    document.getElementById('arsip-2026-status').innerHTML = c2026Surplus >= 0 ? '<span class="pill pill-success">Surplus</span>' : '<span class="pill pill-danger">Defisit</span>';
-
-    const chartCanvas = document.getElementById('financeChart');
-    if (chartCanvas) {
-      const ctx = chartCanvas.getContext('2d');
-      const dIn = [42033519, 106616946, 104140409, c2026In];
-      const dOut = [35928045, 96219868, 93331543, c2026Out];
-      const dSav = [0, 0, 0, c2026Save];
-      if (myChart) { myChart.data.datasets[0].data = dIn; myChart.data.datasets[1].data = dOut; myChart.data.datasets[2].data = dSav; myChart.update(); }
-      else {
-        myChart = new Chart(ctx, {
-          type: 'line',
-          data: {
-            labels: ['2023 (Sept)', '2024', '2025', '2026 (Berjalan)'],
-            datasets: [
-              { label: 'Pemasukan', data: dIn, borderColor: '#0F6E56', backgroundColor: 'rgba(15, 110, 86, 0.1)', tension: 0.4, fill: true },
-              { label: 'Pengeluaran', data: dOut, borderColor: '#A32D2D', backgroundColor: 'rgba(163, 45, 45, 0.1)', tension: 0.4, fill: true },
-              { label: 'Tabungan', data: dSav, borderColor: '#185FA5', backgroundColor: 'rgba(24, 95, 165, 0.1)', tension: 0.4, fill: true }
-            ]
-          },
-          options: { responsive: true, maintainAspectRatio: false }
-        });
+    const ctx = document.getElementById('financeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2023', '2024', '2025', '2026'],
+        datasets: [{ label: 'Pemasukan', data: [42000000, 106000000, 104000000, 110000000], borderColor: '#185FA5', tension: 0.4 }]
       }
-    }
-
-    const dashTxn = document.getElementById('dashboard-txn-list');
-    dashTxn.innerHTML = '';
-    transactions.slice(0, 4).forEach(txn => {
-      let isInc = txn.type === 'in';
-      dashTxn.innerHTML += `<div class="txn-item"><div class="txn-info"><div class="txn-name">${txn.name}</div><div class="txn-date">${txn.date}</div></div><div class="txn-amount ${isInc?'amount-in':'amount-out'}">${isInc?'+':'-'}${formatIDR(txn.amount)}</div></div>`;
     });
-
-    const dashBudget = document.getElementById('dashboard-budget-list');
-    dashBudget.innerHTML = '';
-    Object.keys(BUDGET_LIMITS).forEach(cat => {
-      const spent = categorySpent[cat]; const limit = BUDGET_LIMITS[cat]; const pct = Math.min(Math.round((spent/limit)*100), 100);
-      dashBudget.innerHTML += `<div class="bar-item"><div class="bar-label"><span>${cat}</span><span>${pct}%</span></div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${pct>90?'#E24B4A':'#1D9E75'}"></div></div></div>`;
-    });
-
-    document.getElementById('report-total-in').innerText = formatIDR(totalIn);
-    document.getElementById('report-total-out').innerText = formatIDR(totalOut);
-    document.getElementById('report-total-save').innerText = formatIDR(totalSave);
-    const net = totalIn - totalOut - totalSave;
-    const netEl = document.getElementById('report-net-status');
-    netEl.innerText = (net >= 0 ? '+' : '') + formatIDR(net);
-    netEl.style.color = net >= 0 ? '#0F6E56' : '#A32D2D';
   }
-
-  function saveTxn() {
-    const type = document.getElementById('txnType').value;
-    const name = document.getElementById('txnName').value.trim();
-    const category = document.getElementById('txnCategory').value;
-    const amount = document.getElementById('txnAmount').value;
-    if (!name || !amount) return;
-    transactions.unshift({ id: Date.now(), type, name, category, amount: parseInt(amount), date: new Date().toLocaleDateString('id-ID') });
-    localStorage.setItem('rafael_txns_v4', JSON.stringify(transactions));
-    closeModal();
-    calculateEverything();
-  }
-
-  function deleteTxn(id) {
-    if (confirm("Hapus transaksi?")) {
-      transactions = transactions.filter(t => t.id !== id);
-      localStorage.setItem('rafael_txns_v4', JSON.stringify(transactions));
-      calculateEverything();
-    }
-  }
-
-  window.onload = () => calculateEverything();
 </script>
 </body>
 </html>
