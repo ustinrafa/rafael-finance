@@ -124,7 +124,6 @@
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div id="loginScreen" class="screen active login-wrap">
   <div class="login-card">
     <div class="login-logo"><i class="ti ti-home-2"></i> Rafael's Finance</div>
@@ -142,9 +141,7 @@
   </div>
 </div>
 
-<!-- APPLICATION SCREEN -->
 <div id="dashScreen" class="screen app">
-  <!-- SIDEBAR NAVIGATION -->
   <div class="sidebar">
     <div class="logo"><i class="ti ti-home-2"></i> Rafael's Finance</div>
     <div class="nav-item active" onclick="switchTab('dashboard', this)"><i class="ti ti-layout-dashboard"></i> <span>Dashboard</span></div>
@@ -152,22 +149,20 @@
     <div class="nav-item" onclick="switchTab('anggaran', this)"><i class="ti ti-chart-pie"></i> <span>Anggaran</span></div>
     <div class="nav-item" onclick="switchTab('tabungan', this)"><i class="ti ti-target"></i> <span>Tabungan</span></div>
     <div class="nav-item" onclick="switchTab('laporan', this)"><i class="ti ti-report"></i> <span>Laporan</span></div>
+    <div class="nav-item" onclick="switchTab('arsip', this)"><i class="ti ti-archive"></i> <span>Arsip Keuangan</span></div>
     <div class="logout-btn" onclick="doLogout()"><i class="ti ti-logout"></i> Keluar</div>
   </div>
 
-  <!-- MAIN CONTENT CONTAINER -->
   <div class="main">
     
-    <!-- GLOBAL APP HEADER -->
     <div class="header">
       <div>
         <div id="currentMonthYear" style="font-size:18px;font-weight:500;color:#1a1a1a;">Mei 2026</div>
-        <div class="header-sub">Selamat datang, Rafael 👋</div>
+        <div class="header-sub">Selamat datang, The Rafael's 👋</div>
       </div>
       <button class="btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Catat transaksi</button>
     </div>
 
-    <!-- LIVE METRICS SUMMARY -->
     <div class="metrics">
       <div class="metric">
         <div class="metric-label"><i class="ti ti-wallet"></i> Saldo saat ini</div>
@@ -186,28 +181,22 @@
       </div>
     </div>
 
-    <!-- TAB 1: DASHBOARD -->
     <div id="tab-dashboard" class="content-section active">
       <div class="grid2">
-        <!-- Recent Transactions Card -->
         <div class="card">
           <div class="card-title">Transaksi terbaru <span class="card-action" onclick="goToTabViaLink(1)">Lihat semua</span></div>
           <div id="dashboard-txn-list" class="txn-list-container">
-            <!-- Rendered dynamically -->
-          </div>
+            </div>
         </div>
         
-        <!-- Budget Progress Card -->
         <div class="card">
           <div class="card-title">Anggaran bulan ini <span class="card-action" onclick="goToTabViaLink(2)">Atur anggaran</span></div>
           <div id="dashboard-budget-list">
-            <!-- Rendered dynamically -->
-          </div>
+            </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 2: TRANSAKSI (FULL VIEW) -->
     <div id="tab-transaksi" class="content-section">
       <div class="card">
         <div class="card-title">Semua Riwayat Transaksi</div>
@@ -224,25 +213,21 @@
               </tr>
             </thead>
             <tbody id="full-txn-table-body">
-              <!-- Rendered dynamically -->
-            </tbody>
+              </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: ANGGARAN -->
     <div id="tab-anggaran" class="content-section">
       <div class="card">
         <div class="card-title">Detail Alokasi Anggaran Bulanan</div>
         <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Sistem memantau pemakaian dana berdasarkan kategori pengeluaran Anda.</p>
         <div id="full-budget-management-list">
-          <!-- Rendered dynamically -->
-        </div>
+          </div>
       </div>
     </div>
 
-    <!-- TAB 4: TABUNGAN -->
     <div id="tab-tabungan" class="content-section">
       <div class="card">
         <div class="card-title">Target Tabungan Masa Depan</div>
@@ -267,7 +252,6 @@
       </div>
     </div>
 
-    <!-- TAB 5: LAPORAN -->
     <div id="tab-laporan" class="content-section">
       <div class="card">
         <div class="card-title">Ringkasan Arus Kas (Cash Flow)</div>
@@ -292,10 +276,57 @@
       </div>
     </div>
 
+    <div id="tab-arsip" class="content-section">
+      <div class="card">
+        <div class="card-title">Arsip Keuangan Rekap Tahunan</div>
+        <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Laporan historis perkembangan akumulasi arus kas finansial keluarga dari tahun ke tahun.</p>
+        
+        <div style="overflow-x: auto;">
+          <table class="full-table">
+            <thead>
+              <tr>
+                <th>Tahun</th>
+                <th>Total Pemasukan</th>
+                <th>Total Pengeluaran</th>
+                <th>Total Ditabung</th>
+                <th style="text-align: right;">Surplus Bersih</th>
+                <th style="text-align: center; width: 100px;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;">2025</td>
+                <td style="color:#0F6E56;">Rp 64.200.000</td>
+                <td style="color:#A32D2D;">Rp 48.500.000</td>
+                <td style="color:#185FA5;">Rp 10.800.000</td>
+                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 4.900.000</td>
+                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">2024</td>
+                <td style="color:#0F6E56;">Rp 58.000.000</td>
+                <td style="color:#A32D2D;">Rp 46.200.000</td>
+                <td style="color:#185FA5;">Rp 9.600.000</td>
+                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 2.200.000</td>
+                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">2023</td>
+                <td style="color:#0F6E56;">Rp 52.400.000</td>
+                <td style="color:#A32D2D;">Rp 44.100.000</td>
+                <td style="color:#185FA5;">Rp 8.000.000</td>
+                <td style="text-align: right; color:#A32D2D; font-weight:600;">-Rp 300.000</td>
+                <td style="text-align: center;"><span class="pill pill-danger">Defisit</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
-<!-- POP-UP DIALOG: CATAT TRANSAKSI -->
 <div id="txnModal" class="modal-overlay">
   <div class="modal-card">
     <div class="modal-header">
@@ -317,7 +348,6 @@
     <div class="field">
       <label for="txnCategory">Kategori Alokasi</label>
       <select id="txnCategory">
-        <!-- Out Categories -->
         <option value="Makanan & belanja">Makanan & Belanja</option>
         <option value="Tagihan rutin">Tagihan Rutin (Listrik/Air)</option>
         <option value="Pendidikan">Pendidikan Sekolah</option>
@@ -343,7 +373,7 @@
     "Lain-lain": 500000
   };
 
-  // --- SEED DATA AWAL (Jika LocalStorage masih kosong) ---
+  // --- SEED DATA AWAL ---
   const initialData = [
     { id: 1, type: 'out', name: 'Belanja bulanan', category: 'Makanan & belanja', amount: 450000, date: '24 Mei 2026' },
     { id: 2, type: 'in', name: 'Gaji bulanan masuk', category: 'Gaji', amount: 5000000, date: '20 Mei 2026' },
@@ -382,7 +412,6 @@
   }
 
   // --- MODAL UTILITY ---
-   Kak// Menyesuaikan pilihan kategori secara otomatis berdasarkan Jenis Transaksi
   function toggleCategoryDropdown() {
     const type = document.getElementById('txnType').value;
     const catSelect = document.getElementById('txnCategory');
@@ -419,12 +448,10 @@
 
   // --- DYNAMIC NAVIGASI / TAB SYSTEM ---
   function switchTab(tabId, element) {
-    // Nav bar items status styling
     const items = document.querySelectorAll('.nav-item');
     items.forEach(i => i.classList.remove('active'));
     element.classList.add('active');
 
-    // Section displaying toggle
     const sections = document.querySelectorAll('.content-section');
     sections.forEach(s => s.classList.remove('active'));
     document.getElementById('tab-' + tabId).classList.add('active');
@@ -441,12 +468,10 @@
   }
 
   function calculateEverything() {
-    // Hitung akumulasi nilai total uang
     let totalIn = 0;
     let totalOut = 0;
     let totalSave = 0;
 
-    // Hitung pengeluaran per kategori anggaran khusus bulan ini
     const categorySpent = {
       "Makanan & belanja": 0,
       "Tagihan rutin": 0,
@@ -469,23 +494,19 @@
       }
     });
 
-    // Perhitungan Saldo Akhir Berjalan Dinamis
-    // Asumsi dasar: Saldo Mula-mula Sebelum Mutasi Sistem adalah Rp 3.485.000 agar match visual
     const saldoAwalMula = 3485000;
     const currentBalance = saldoAwalMula + totalIn - totalOut - totalSave;
 
-    // Update Angka di Tampilan Utama (Dashboard Card Summary)
     document.getElementById('metric-balance').innerText = formatIDR(currentBalance);
     document.getElementById('metric-expense').innerText = formatIDR(totalOut);
     document.getElementById('metric-savings').innerText = formatIDR(totalSave);
 
-    // --- RENDER RECENT TRANSACTIONS (DASHBOARD SCREEN V2) ---
+    // --- RENDER RECENT TRANSACTIONS ---
     const dashTxnContainer = document.getElementById('dashboard-txn-list');
     if (transactions.length === 0) {
       dashTxnContainer.innerHTML = '<div style="text-align:center; padding:2rem; color:#888; font-size:13px;">Belum ada riwayat pencatatan.</div>';
     } else {
       dashTxnContainer.innerHTML = '';
-      // Tampilkan maksimal 4 transaksi terbaru untuk ringkasan dashboard
       transactions.slice(0, 4).forEach(txn => {
         let isInc = txn.type === 'in';
         let isSav = txn.type === 'save';
@@ -509,7 +530,7 @@
       });
     }
 
-    // --- RENDER BUDGET STATUS BARS (DASHBOARD & DETAIL TAB) ---
+    // --- RENDER BUDGET STATUS BARS ---
     const dashBudgetContainer = document.getElementById('dashboard-budget-list');
     const fullBudgetContainer = document.getElementById('full-budget-management-list');
     
@@ -521,14 +542,13 @@
       const limit = BUDGET_LIMITS[cat];
       const pct = Math.min(Math.round((spent / limit) * 100), 100);
       
-      // Pilih warna progress bar berdasarkan persentase pemakaian alokasi dana
-      let barColor = '#1D9E75'; // Aman (Hijau)
+      let barColor = '#1D9E75';
       let pillClass = 'pill-success';
       if (pct >= 90) {
-        barColor = '#E24B4A'; // Kritis (Merah)
+        barColor = '#E24B4A';
         pillClass = 'pill-danger';
       } else if (pct >= 75) {
-        barColor = '#EF9F27'; // Peringatan (Kuning)
+        barColor = '#EF9F27';
         pillClass = 'pill-warning';
       }
 
@@ -547,7 +567,7 @@
       fullBudgetContainer.innerHTML += budgetItemHTML;
     });
 
-    // --- RENDER TABLE LENGKAP PADA TAB TRANSAKSI ---
+    // --- RENDER TABLE LENGKAP ---
     const fullTableBody = document.getElementById('full-txn-table-body');
     fullTableBody.innerHTML = '';
     
@@ -574,7 +594,7 @@
       `;
     });
 
-    // --- RENDER STATEMENT LAPORAN FINANCIAL ---
+    // --- RENDER STATEMENT LAPORAN ---
     document.getElementById('report-total-in').innerText = formatIDR(totalIn);
     document.getElementById('report-total-out').innerText = formatIDR(totalOut);
     document.getElementById('report-total-save').innerText = formatIDR(totalSave);
@@ -593,11 +613,10 @@
     const amount = document.getElementById('txnAmount').value;
 
     if (!name || !amount || amount <= 0) {
-      alert("Harap masukkan nama keterangan & nominal nominal uang yang valid!");
+      alert("Harap masukkan nama keterangan & nominal uang yang valid!");
       return;
     }
 
-    // Generator Waktu Sekarang Indonesia Berjalan Ringkas
     const today = new Date();
     const options = { day: 'numeric', month: 'short', year: 'numeric' };
     const formattedDate = today.toLocaleDateString('id-ID', options);
@@ -631,9 +650,7 @@
   document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
   document.getElementById('username').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('password').focus(); });
 
-  // Jalankan perhitungan awal jika user sudah login (untuk preview / refresh aman)
   window.onload = function() {
-    // Mengatur tahun/bulan dinamis sekarang berjalan otomatis
     const d = new Date();
     const currentMonths = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
     document.getElementById('currentMonthYear').innerText = currentMonths[d.getMonth()] + " " + d.getFullYear();
