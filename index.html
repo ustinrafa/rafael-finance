@@ -185,8 +185,8 @@
     <div id="tab-dashboard" class="content-section active">
       
       <div class="card" style="margin-bottom: 12px;">
-        <div class="card-title">Parameter Arus Kas Bulan Ini</div>
-        <div style="position: relative; height: 180px; width: 100%; display: flex; justify-content: center;">
+        <div class="card-title">Tren Historis Arus Kas (Tahun ke Tahun)</div>
+        <div style="position: relative; height: 220px; width: 100%; display: flex; justify-content: center;">
           <canvas id="financeChart"></canvas>
         </div>
       </div>
@@ -513,42 +513,95 @@
     document.getElementById('metric-expense').innerText = formatIDR(totalOut);
     document.getElementById('metric-savings').innerText = formatIDR(totalSave);
 
-    // --- UPDATE DIAGRAM CHART.JS (DOUGHNUT) ---
+    // --- UPDATE DIAGRAM CHART.JS (LINE CHART TAHUNAN) ---
     const chartCanvas = document.getElementById('financeChart');
     if (chartCanvas) {
       const ctx = chartCanvas.getContext('2d');
+      
+      // Data historis statis digabung dengan data berjalan (2026)
+      const dataIn = [52400000, 58000000, 64200000, totalIn];
+      const dataOut = [44100000, 46200000, 48500000, totalOut];
+      const dataSave = [8000000, 9600000, 10800000, totalSave];
+
       if (myChart) {
-        myChart.data.datasets[0].data = [totalIn, totalOut, totalSave];
+        myChart.data.datasets[0].data = dataIn;
+        myChart.data.datasets[1].data = dataOut;
+        myChart.data.datasets[2].data = dataSave;
         myChart.update();
       } else {
         myChart = new Chart(ctx, {
-          type: 'doughnut',
+          type: 'line',
           data: {
-            labels: ['Pemasukan', 'Pengeluaran', 'Tabungan'],
-            datasets: [{
-              data: [totalIn, totalOut, totalSave],
-              backgroundColor: [
-                '#0F6E56', // Hijau
-                '#A32D2D', // Merah
-                '#185FA5'  // Biru
-              ],
-              borderWidth: 0,
-              hoverOffset: 4
-            }]
+            labels: ['2023', '2024', '2025', '2026 (Berjalan)'],
+            datasets: [
+              {
+                label: 'Pemasukan',
+                data: dataIn,
+                borderColor: '#0F6E56',
+                backgroundColor: 'rgba(15, 110, 86, 0.1)',
+                borderWidth: 2.5,
+                tension: 0.4, // Line melengkung (spline)
+                fill: true,
+                pointBackgroundColor: '#0F6E56',
+                pointRadius: 4
+              },
+              {
+                label: 'Pengeluaran',
+                data: dataOut,
+                borderColor: '#A32D2D',
+                backgroundColor: 'rgba(163, 45, 45, 0.1)',
+                borderWidth: 2.5,
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#A32D2D',
+                pointRadius: 4
+              },
+              {
+                label: 'Tabungan',
+                data: dataSave,
+                borderColor: '#185FA5',
+                backgroundColor: 'rgba(24, 95, 165, 0.1)',
+                borderWidth: 2.5,
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: '#185FA5',
+                pointRadius: 4
+              }
+            ]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '70%',
+            interaction: {
+              mode: 'index',
+              intersect: false,
+            },
             plugins: {
               legend: {
                 display: true,
-                position: 'right',
+                position: 'bottom',
                 labels: {
-                  font: { family: 'system-ui', size: 12 },
+                  font: { family: 'system-ui', size: 11 },
                   usePointStyle: true,
-                  boxWidth: 8
+                  boxWidth: 6,
+                  padding: 15
                 }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: {
+                  font: { size: 10 },
+                  callback: function(value) {
+                    if (value >= 1000000) return 'Rp ' + (value / 1000000) + ' Jt';
+                    if (value >= 1000) return 'Rp ' + (value / 1000) + ' Rb';
+                    return value;
+                  }
+                }
+              },
+              x: {
+                ticks: { font: { size: 11 } }
               }
             }
           }
