@@ -185,8 +185,8 @@
     <div id="tab-dashboard" class="content-section active">
       
       <div class="card" style="margin-bottom: 12px;">
-        <div class="card-title">Statistik Arus Kas Bulan Ini</div>
-        <div style="position: relative; height: 180px; width: 100%;">
+        <div class="card-title">Parameter Arus Kas Bulan Ini</div>
+        <div style="position: relative; height: 180px; width: 100%; display: flex; justify-content: center;">
           <canvas id="financeChart"></canvas>
         </div>
       </div>
@@ -513,7 +513,7 @@
     document.getElementById('metric-expense').innerText = formatIDR(totalOut);
     document.getElementById('metric-savings').innerText = formatIDR(totalSave);
 
-    // --- UPDATE DIAGRAM CHART.JS ---
+    // --- UPDATE DIAGRAM CHART.JS (DOUGHNUT) ---
     const chartCanvas = document.getElementById('financeChart');
     if (chartCanvas) {
       const ctx = chartCanvas.getContext('2d');
@@ -522,31 +522,32 @@
         myChart.update();
       } else {
         myChart = new Chart(ctx, {
-          type: 'bar',
+          type: 'doughnut',
           data: {
             labels: ['Pemasukan', 'Pengeluaran', 'Tabungan'],
             datasets: [{
-              label: 'Nominal (Rp)',
               data: [totalIn, totalOut, totalSave],
               backgroundColor: [
                 '#0F6E56', // Hijau
                 '#A32D2D', // Merah
                 '#185FA5'  // Biru
               ],
-              borderRadius: 6
+              borderWidth: 0,
+              hoverOffset: 4
             }]
           },
           options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
-            scales: {
-              y: {
-                beginAtZero: true,
-                ticks: {
-                  callback: function(value) {
-                    return 'Rp ' + new Intl.NumberFormat('id-ID').format(value);
-                  }
+            cutout: '70%',
+            plugins: {
+              legend: {
+                display: true,
+                position: 'right',
+                labels: {
+                  font: { family: 'system-ui', size: 12 },
+                  usePointStyle: true,
+                  boxWidth: 8
                 }
               }
             }
