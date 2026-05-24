@@ -122,6 +122,7 @@
     .nav-item span { display: none; }
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -159,7 +160,7 @@
     <div class="header">
       <div>
         <div id="currentMonthYear" style="font-size:18px;font-weight:500;color:#1a1a1a;">Mei 2026</div>
-        <div class="header-sub">Selamat datang, Rafael 👋</div>
+        <div class="header-sub">Selamat datang, Rafael's Finance 👋</div>
       </div>
       <button class="btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Catat transaksi baru</button>
     </div>
@@ -208,7 +209,20 @@
 
     <div id="tab-transaksi" class="content-section">
       <div class="card">
-        <div class="card-title">Semua Riwayat Transaksi Manual</div>
+        
+<div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+  <span>Semua Riwayat Transaksi Manual</span>
+  <div style="display:flex; gap:8px; align-items:center;">
+    <select id="monthSelectorTxn" style="padding:5px 8px; border-radius:6px; border:1px solid #ddd; font-size:12px;">
+      <option value="0">Januari</option><option value="1">Februari</option><option value="2">Maret</option>
+      <option value="3">April</option><option value="4" selected>Mei</option><option value="5">Juni</option>
+      <option value="6">Juli</option><option value="7">Agustus</option><option value="8">September</option>
+      <option value="9">Oktober</option><option value="10">November</option><option value="11">Desember</option>
+    </select>
+    <span class="card-action" onclick="downloadMonthlyTransactions()"><i class="ti ti-file-spreadsheet"></i> Excel</span>
+  </div>
+</div>
+
         <div style="overflow-x: auto;">
           <table class="full-table">
             <thead>
@@ -318,7 +332,20 @@
 
     <div id="tab-arsip" class="content-section">
       <div class="card">
-        <div class="card-title">Arsip Keuangan Rekap Tahunan</div>
+        
+<div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+  <span>Arsip Keuangan Rekap Tahunan</span>
+  <div style="display:flex; gap:8px; align-items:center;">
+    <select id="monthSelectorArchive" style="padding:5px 8px; border-radius:6px; border:1px solid #ddd; font-size:12px;">
+      <option value="0">Januari</option><option value="1">Februari</option><option value="2">Maret</option>
+      <option value="3">April</option><option value="4" selected>Mei</option><option value="5">Juni</option>
+      <option value="6">Juli</option><option value="7">Agustus</option><option value="8">September</option>
+      <option value="9">Oktober</option><option value="10">November</option><option value="11">Desember</option>
+    </select>
+    <span class="card-action" onclick="downloadMonthlyArchive()"><i class="ti ti-file-spreadsheet"></i> Excel</span>
+  </div>
+</div>
+
         <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Data sesuai spreadsheet Anda. Catatan baru tahun 2026 akan terakumulasi otomatis di sini.</p>
         
         <div style="overflow-x: auto;">
@@ -782,6 +809,54 @@
       calculateEverything();
     }
   }
+
+  
+
+function downloadMonthlyTransactions() {
+  const selectedMonth = parseInt(document.getElementById('monthSelectorTxn').value);
+  const year = new Date().getFullYear();
+  const months = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+
+  const filtered = transactions.filter(t => {
+    const m = months.findIndex(mon => t.date.includes(mon.substring(0,3)));
+    return m === selectedMonth;
+  });
+
+  const data = filtered.map(t => ({
+    Tanggal: t.date,
+    "Nama Transaksi": t.name,
+    Kategori: t.category,
+    Jenis: t.type === 'in' ? 'Pemasukan' : (t.type === 'save' ? 'Tabungan' : 'Pengeluaran'),
+    Nominal: t.amount
+  }));
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(data.length ? data : [{Info:'Tidak ada data bulan ini'}]);
+  XLSX.utils.book_append_sheet(wb, ws, "Transaksi");
+  XLSX.writeFile(wb, `Transaksi_${months[selectedMonth]}_${year}.xlsx`);
+}
+
+function downloadMonthlyArchive() {
+ {
+  const data = [
+    {Tahun:'2023 (Sept)', Pemasukan:42033519, Pengeluaran:35928045, Tabungan:0, Surplus:6105474},
+    {Tahun:'2024', Pemasukan:106616946, Pengeluaran:96219868, Tabungan:0, Surplus:10397078},
+    {Tahun:'2025', Pemasukan:104140409, Pengeluaran:93331543, Tabungan:0, Surplus:10808866},
+    {
+      Tahun:'2026',
+      Pemasukan:document.getElementById('arsip-2026-in').innerText,
+      Pengeluaran:document.getElementById('arsip-2026-out').innerText,
+      Tabungan:document.getElementById('arsip-2026-save').innerText,
+      Surplus:document.getElementById('arsip-2026-surplus').innerText
+    }
+  ];
+
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(wb, ws, "Arsip");
+  XLSX.writeFile(wb, "Arsip_Keuangan.xlsx");
+}
+
 
   // --- HOTKEY TRIGGER & INIT ---
   document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
