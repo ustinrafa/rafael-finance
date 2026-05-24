@@ -161,22 +161,22 @@
         <div id="currentMonthYear" style="font-size:18px;font-weight:500;color:#1a1a1a;">Mei 2026</div>
         <div class="header-sub">Selamat datang, The Rafael's 👋</div>
       </div>
-      <button class="btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Catat transaksi</button>
+      <button class="btn-primary" onclick="openModal()"><i class="ti ti-plus"></i> Catat transaksi baru</button>
     </div>
 
     <div class="metrics">
       <div class="metric">
-        <div class="metric-label"><i class="ti ti-wallet"></i> Saldo saat ini</div>
+        <div class="metric-label"><i class="ti ti-wallet"></i> Total Pemasukan Baru</div>
         <div class="metric-value" id="metric-balance">Rp 0</div>
         <div class="metric-delta delta-up" id="metric-balance-sub"><i class="ti ti-trending-up"></i> Terkelola otomatis</div>
       </div>
       <div class="metric">
-        <div class="metric-label"><i class="ti ti-arrow-down"></i> Pengeluaran Bulan Ini</div>
+        <div class="metric-label"><i class="ti ti-arrow-down"></i> Total Pengeluaran Baru</div>
         <div class="metric-value" id="metric-expense">Rp 0</div>
         <div class="metric-delta delta-down" id="metric-expense-sub"><i class="ti ti-trending-up"></i> Berdasarkan anggaran</div>
       </div>
       <div class="metric">
-        <div class="metric-label"><i class="ti ti-piggy-bank"></i> Ditabung Bulan Ini</div>
+        <div class="metric-label"><i class="ti ti-piggy-bank"></i> Ditabung Baru</div>
         <div class="metric-value" id="metric-savings">Rp 0</div>
         <div class="metric-delta delta-up" id="metric-savings-sub"><i class="ti ti-check"></i> Konsisten & aman</div>
       </div>
@@ -185,7 +185,7 @@
     <div id="tab-dashboard" class="content-section active">
       
       <div class="card" style="margin-bottom: 12px;">
-        <div class="card-title">Tren Historis Arus Kas (Tahun ke Tahun)</div>
+        <div class="card-title">Tren Historis Arus Kas (Berdasarkan Data Asli)</div>
         <div style="position: relative; height: 220px; width: 100%; display: flex; justify-content: center;">
           <canvas id="financeChart"></canvas>
         </div>
@@ -193,13 +193,13 @@
 
       <div class="grid2">
         <div class="card">
-          <div class="card-title">Transaksi terbaru <span class="card-action" onclick="goToTabViaLink(1)">Lihat semua</span></div>
+          <div class="card-title">Pencatatan Terbaru <span class="card-action" onclick="goToTabViaLink(1)">Lihat semua</span></div>
           <div id="dashboard-txn-list" class="txn-list-container">
             </div>
         </div>
         
         <div class="card">
-          <div class="card-title">Anggaran bulan ini <span class="card-action" onclick="goToTabViaLink(2)">Atur anggaran</span></div>
+          <div class="card-title">Pemakaian Anggaran Baru <span class="card-action" onclick="goToTabViaLink(2)">Atur anggaran</span></div>
           <div id="dashboard-budget-list">
             </div>
         </div>
@@ -208,7 +208,7 @@
 
     <div id="tab-transaksi" class="content-section">
       <div class="card">
-        <div class="card-title">Semua Riwayat Transaksi</div>
+        <div class="card-title">Semua Riwayat Transaksi Manual</div>
         <div style="overflow-x: auto;">
           <table class="full-table">
             <thead>
@@ -263,22 +263,22 @@
 
     <div id="tab-laporan" class="content-section">
       <div class="card">
-        <div class="card-title">Ringkasan Arus Kas (Cash Flow)</div>
+        <div class="card-title">Ringkasan Arus Kas Baru</div>
         <div style="padding: 1rem 0; line-height: 1.6; font-size: 14px;">
           <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
-            <span>Total Pemasukan Bulan Ini</span>
+            <span>Total Pemasukan Tambahan</span>
             <span style="color:#0F6E56; font-weight:bold;" id="report-total-in">Rp 0</span>
           </div>
           <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
-            <span>Total Pengeluaran Bulan Ini</span>
+            <span>Total Pengeluaran Tambahan</span>
             <span style="color:#A32D2D; font-weight:bold;" id="report-total-out">Rp 0</span>
           </div>
           <div style="display:flex; justify-content:space-between; border-bottom: 0.5px solid #eee; padding: 8px 0;">
             <span>Total Alokasi Tabungan</span>
-            <span style="color:#185FA5; font-weight:bold;" id="report-total-save">Rp 900.000</span>
+            <span style="color:#185FA5; font-weight:bold;" id="report-total-save">Rp 0</span>
           </div>
           <div style="display:flex; justify-content:space-between; padding: 12px 0; font-size: 16px; font-weight:bold;">
-            <span>Surplus / Defisit Bersih</span>
+            <span>Surplus / Defisit Bersih (Bulan Ini)</span>
             <span id="report-net-status">Rp 0</span>
           </div>
         </div>
@@ -288,7 +288,7 @@
     <div id="tab-arsip" class="content-section">
       <div class="card">
         <div class="card-title">Arsip Keuangan Rekap Tahunan</div>
-        <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Laporan historis perkembangan akumulasi arus kas finansial keluarga dari tahun ke tahun.</p>
+        <p style="font-size: 13px; color: #666; margin-bottom: 1.5rem;">Data sesuai spreadsheet Anda. Catatan baru tahun 2026 akan terakumulasi otomatis di sini.</p>
         
         <div style="overflow-x: auto;">
           <table class="full-table">
@@ -303,29 +303,37 @@
               </tr>
             </thead>
             <tbody>
+              <tr style="background-color: #fafbfc;">
+                <td style="font-weight:600; color:#185FA5;">2026 (Berjalan)</td>
+                <td id="arsip-2026-in" style="color:#0F6E56; font-weight:500;">Rp 56.047.003</td>
+                <td id="arsip-2026-out" style="color:#A32D2D; font-weight:500;">Rp 38.173.596</td>
+                <td id="arsip-2026-save" style="color:#185FA5; font-weight:500;">Rp 0</td>
+                <td id="arsip-2026-surplus" style="text-align: right; font-weight:600;">+Rp 17.873.407</td>
+                <td id="arsip-2026-status" style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
+              </tr>
               <tr>
                 <td style="font-weight:600;">2025</td>
-                <td style="color:#0F6E56;">Rp 64.200.000</td>
-                <td style="color:#A32D2D;">Rp 48.500.000</td>
-                <td style="color:#185FA5;">Rp 10.800.000</td>
-                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 4.900.000</td>
+                <td style="color:#0F6E56;">Rp 104.140.409</td>
+                <td style="color:#A32D2D;">Rp 93.331.543</td>
+                <td style="color:#185FA5;">Rp 0</td>
+                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 10.808.866</td>
                 <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
               </tr>
               <tr>
                 <td style="font-weight:600;">2024</td>
-                <td style="color:#0F6E56;">Rp 58.000.000</td>
-                <td style="color:#A32D2D;">Rp 46.200.000</td>
-                <td style="color:#185FA5;">Rp 9.600.000</td>
-                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 2.200.000</td>
+                <td style="color:#0F6E56;">Rp 106.616.946</td>
+                <td style="color:#A32D2D;">Rp 96.219.868</td>
+                <td style="color:#185FA5;">Rp 0</td>
+                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 10.397.078</td>
                 <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
               </tr>
               <tr>
-                <td style="font-weight:600;">2023</td>
-                <td style="color:#0F6E56;">Rp 52.400.000</td>
-                <td style="color:#A32D2D;">Rp 44.100.000</td>
-                <td style="color:#185FA5;">Rp 8.000.000</td>
-                <td style="text-align: right; color:#A32D2D; font-weight:600;">-Rp 300.000</td>
-                <td style="text-align: center;"><span class="pill pill-danger">Defisit</span></td>
+                <td style="font-weight:600;">2023 (Sept)</td>
+                <td style="color:#0F6E56;">Rp 42.033.519</td>
+                <td style="color:#A32D2D;">Rp 35.928.045</td>
+                <td style="color:#185FA5;">Rp 0</td>
+                <td style="text-align: right; color:#0F6E56; font-weight:600;">+Rp 6.105.474</td>
+                <td style="text-align: center;"><span class="pill pill-success">Surplus</span></td>
               </tr>
             </tbody>
           </table>
@@ -385,20 +393,9 @@
     "Lain-lain": 500000
   };
 
-  // --- SEED DATA AWAL ---
-  const initialData = [
-    { id: 1, type: 'out', name: 'Belanja bulanan', category: 'Makanan & belanja', amount: 450000, date: '24 Mei 2026' },
-    { id: 2, type: 'in', name: 'Gaji bulanan masuk', category: 'Gaji', amount: 5000000, date: '20 Mei 2026' },
-    { id: 3, type: 'out', name: 'Bayar listrik & air', category: 'Tagihan rutin', amount: 285000, date: '18 Mei 2026' },
-    { id: 4, type: 'out', name: 'SPP Sekolah anak', category: 'Pendidikan', amount: 350000, date: '15 Mei 2026' },
-    { id: 5, type: 'save', name: 'Alokasi bulanan dana darurat', category: 'Tabungan', amount: 900000, date: '02 Mei 2026' }
-  ];
-
-  let transactions = JSON.parse(localStorage.getItem('rafael_txns')) || [];
-  if (transactions.length === 0) {
-    transactions = initialData;
-    localStorage.setItem('rafael_txns', JSON.stringify(transactions));
-  }
+  // --- PENGATURAN RESET DATA (Memulai Lembaran Baru yang Bersih) ---
+  // Menggunakan nama penyimpana baru 'rafael_txns_v2' agar data dummy terhapus.
+  let transactions = JSON.parse(localStorage.getItem('rafael_txns_v2')) || [];
 
   // --- SISTEM LOGIN & LOGOUT MURNI FRONTEND ---
   function doLogin() {
@@ -506,37 +503,58 @@
       }
     });
 
-    const saldoAwalMula = 3485000;
-    const currentBalance = saldoAwalMula + totalIn - totalOut - totalSave;
-
-    document.getElementById('metric-balance').innerText = formatIDR(currentBalance);
+    document.getElementById('metric-balance').innerText = formatIDR(totalIn);
     document.getElementById('metric-expense').innerText = formatIDR(totalOut);
     document.getElementById('metric-savings').innerText = formatIDR(totalSave);
+
+    // --- LOGIKA PENGGABUNGAN DATA ASLI 2026 DENGAN INPUT BARU ---
+    // Data dasar (baseline) dari spreadsheet asli user untuk tahun 2026
+    const base2026In = 56047003;
+    const base2026Out = 38173596;
+    const base2026Save = 0;
+
+    // Data berjalan = Data dasar + data yang dicatat secara manual di aplikasi ini
+    const current2026In = base2026In + totalIn;
+    const current2026Out = base2026Out + totalOut;
+    const current2026Save = base2026Save + totalSave;
+    const current2026Surplus = current2026In - current2026Out - current2026Save;
+
+    // --- UPDATE ANGKA DI TABEL "ARSIP KEUANGAN" (BARIS 2026) ---
+    document.getElementById('arsip-2026-in').innerText = formatIDR(current2026In);
+    document.getElementById('arsip-2026-out').innerText = formatIDR(current2026Out);
+    document.getElementById('arsip-2026-save').innerText = formatIDR(current2026Save);
+    
+    const surplusEl = document.getElementById('arsip-2026-surplus');
+    surplusEl.innerText = (current2026Surplus >= 0 ? '+' : '') + formatIDR(current2026Surplus);
+    surplusEl.style.color = current2026Surplus >= 0 ? '#0F6E56' : '#A32D2D';
+
+    const statusEl = document.getElementById('arsip-2026-status');
+    statusEl.innerHTML = current2026Surplus >= 0 ? '<span class="pill pill-success">Surplus</span>' : '<span class="pill pill-danger">Defisit</span>';
 
     // --- UPDATE DIAGRAM CHART.JS (LINE CHART TAHUNAN) ---
     const chartCanvas = document.getElementById('financeChart');
     if (chartCanvas) {
       const ctx = chartCanvas.getContext('2d');
       
-      // Data historis statis digabung dengan data berjalan (2026)
-      const dataIn = [52400000, 58000000, 64200000, totalIn];
-      const dataOut = [44100000, 46200000, 48500000, totalOut];
-      const dataSave = [8000000, 9600000, 10800000, totalSave];
+      // Data riil spreadsheet user (2023, 2024, 2025) digabung dengan current2026
+      const dataInArray = [42033519, 106616946, 104140409, current2026In];
+      const dataOutArray = [35928045, 96219868, 93331543, current2026Out];
+      const dataSaveArray = [0, 0, 0, current2026Save];
 
       if (myChart) {
-        myChart.data.datasets[0].data = dataIn;
-        myChart.data.datasets[1].data = dataOut;
-        myChart.data.datasets[2].data = dataSave;
+        myChart.data.datasets[0].data = dataInArray;
+        myChart.data.datasets[1].data = dataOutArray;
+        myChart.data.datasets[2].data = dataSaveArray;
         myChart.update();
       } else {
         myChart = new Chart(ctx, {
           type: 'line',
           data: {
-            labels: ['2023', '2024', '2025', '2026 (Berjalan)'],
+            labels: ['2023 (Sept)', '2024', '2025', '2026 (Berjalan)'],
             datasets: [
               {
                 label: 'Pemasukan',
-                data: dataIn,
+                data: dataInArray,
                 borderColor: '#0F6E56',
                 backgroundColor: 'rgba(15, 110, 86, 0.1)',
                 borderWidth: 2.5,
@@ -547,7 +565,7 @@
               },
               {
                 label: 'Pengeluaran',
-                data: dataOut,
+                data: dataOutArray,
                 borderColor: '#A32D2D',
                 backgroundColor: 'rgba(163, 45, 45, 0.1)',
                 borderWidth: 2.5,
@@ -558,7 +576,7 @@
               },
               {
                 label: 'Tabungan',
-                data: dataSave,
+                data: dataSaveArray,
                 borderColor: '#185FA5',
                 backgroundColor: 'rgba(24, 95, 165, 0.1)',
                 borderWidth: 2.5,
@@ -612,7 +630,7 @@
     // --- RENDER RECENT TRANSACTIONS ---
     const dashTxnContainer = document.getElementById('dashboard-txn-list');
     if (transactions.length === 0) {
-      dashTxnContainer.innerHTML = '<div style="text-align:center; padding:2rem; color:#888; font-size:13px;">Belum ada riwayat pencatatan.</div>';
+      dashTxnContainer.innerHTML = '<div style="text-align:center; padding:2rem; color:#888; font-size:13px;">Belum ada pencatatan manual baru.</div>';
     } else {
       dashTxnContainer.innerHTML = '';
       transactions.slice(0, 4).forEach(txn => {
@@ -675,7 +693,7 @@
       fullBudgetContainer.innerHTML += budgetItemHTML;
     });
 
-    // --- RENDER TABLE LENGKAP ---
+    // --- RENDER TABLE LENGKAP TRANSAKSI BARU ---
     const fullTableBody = document.getElementById('full-txn-table-body');
     fullTableBody.innerHTML = '';
     
@@ -702,7 +720,7 @@
       `;
     });
 
-    // --- RENDER STATEMENT LAPORAN ---
+    // --- RENDER STATEMENT LAPORAN BULANAN ---
     document.getElementById('report-total-in').innerText = formatIDR(totalIn);
     document.getElementById('report-total-out').innerText = formatIDR(totalOut);
     document.getElementById('report-total-save').innerText = formatIDR(totalSave);
@@ -739,7 +757,7 @@
     };
 
     transactions.unshift(newTxn);
-    localStorage.setItem('rafael_txns', JSON.stringify(transactions));
+    localStorage.setItem('rafael_txns_v2', JSON.stringify(transactions));
     
     closeModal();
     calculateEverything();
@@ -749,7 +767,7 @@
   function deleteTxn(id) {
     if (confirm("Apakah Anda yakin ingin menghapus catatan transaksi ini dari pembukuan?")) {
       transactions = transactions.filter(t => t.id !== id);
-      localStorage.setItem('rafael_txns', JSON.stringify(transactions));
+      localStorage.setItem('rafael_txns_v2', JSON.stringify(transactions));
       calculateEverything();
     }
   }
