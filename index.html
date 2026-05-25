@@ -852,12 +852,12 @@ body{
   }
 
   let csv =
-    "Tanggal,Nama,Kategori,Jenis,Nominal\\n";
+    "Tanggal,Nama,Kategori,Jenis,Nominal\n";
 
   filtered.forEach(txn => {
 
     csv +=
-      `${txn.date},${txn.name},${txn.category},${txn.type},${txn.amount}\\n`;
+      `${txn.date},${txn.name},${txn.category},${txn.type},${txn.amount}\n`;
 
   });
 
