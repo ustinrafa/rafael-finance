@@ -861,6 +861,77 @@ font-weight:600;
   }
 
   // --- ACTION HAPUS TRANSAKSI ---
+ function filterTransactions(){
+
+  const selectedMonth =
+    document.getElementById('monthFilter').value;
+
+  const rows =
+    document.querySelectorAll(
+      '#full-txn-table-body tr'
+    );
+
+  let visibleCount = 0;
+
+  rows.forEach(row => {
+
+    const dateText =
+      row.cells[0].innerText;
+
+    if(
+      selectedMonth === 'all'
+      ||
+      dateText.includes(selectedMonth)
+    ){
+
+      row.style.display = '';
+
+      visibleCount++;
+
+    }else{
+
+      row.style.display = 'none';
+
+    }
+
+  });
+
+  let emptyMsg =
+    document.getElementById('emptyMonthMsg');
+
+  if(!emptyMsg){
+
+    emptyMsg =
+      document.createElement('div');
+
+    emptyMsg.id = 'emptyMonthMsg';
+
+    emptyMsg.style.padding = '20px';
+
+    emptyMsg.style.textAlign = 'center';
+
+    emptyMsg.style.color = '#888';
+
+    emptyMsg.style.fontSize = '13px';
+
+    document
+      .querySelector('.full-table')
+      .after(emptyMsg);
+
+  }
+
+  if(visibleCount === 0){
+
+    emptyMsg.innerHTML =
+      'Belum ada transaksi bulan ini';
+
+  }else{
+
+    emptyMsg.innerHTML = '';
+
+  }
+
+}
  function downloadExcel(){
 
   const monthNames = [
