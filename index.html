@@ -243,7 +243,23 @@ body{
 
     <div id="tab-transaksi" class="content-section">
       <div class="card">
-        <div class="card-title">Semua Riwayat Transaksi Manual</div>
+        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center;">
+  <span>Semua Riwayat Transaksi Manual</span>
+
+  <button onclick="downloadExcel()"
+  style="
+  background:linear-gradient(135deg,#185FA5,#2B7BD1);
+  color:white;
+  border:none;
+  padding:10px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:12px;
+  font-weight:600;
+  ">
+  ⬇ Download Excel
+  </button>
+</div>
         <div style="overflow-x: auto;">
           <table class="full-table">
             <thead>
@@ -828,6 +844,60 @@ body{
     document.getElementById('currentMonthYear').innerText = currentMonths[d.getMonth()] + " " + d.getFullYear();
     calculateEverything();
   };
+ <script>
+
+function downloadExcel(){
+
+  let csv = [];
+
+  csv.push("Tanggal,Nama,Kategori,Jenis,Nominal");
+
+  if(transactions.length === 0){
+
+    alert("Belum ada transaksi");
+    return;
+  }
+
+  transactions.forEach(txn => {
+
+    csv.push(
+      `${txn.date},${txn.name},${txn.category},${txn.type},${txn.amount}`
+    );
+
+  });
+
+  const csvContent = csv.join("\n");
+
+  const blob = new Blob([csvContent], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const link = document.createElement("a");
+
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute("href", url);
+
+  const today = new Date();
+
+  const month = today.toLocaleString('id-ID', { month: 'long' });
+
+  link.setAttribute(
+    "download",
+    `transaksi-${month}.csv`
+  );
+
+  link.style.visibility = 'hidden';
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+}
+
+</script>
 </script>
 </body>
 </html>
