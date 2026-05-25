@@ -506,6 +506,62 @@ body{
       err.classList.remove('show');
       document.getElementById('loginScreen').classList.remove('active');
       document.getElementById('dashScreen').classList.add('active');
+     function downloadExcel(){
+
+  const monthNames = [
+    "Januari","Februari","Maret","April",
+    "Mei","Juni","Juli","Agustus",
+    "September","Oktober","November","Desember"
+  ];
+
+  const currentMonth =
+    monthNames[new Date().getMonth()];
+
+  const filtered =
+    transactions.filter(txn =>
+      txn.date.includes(currentMonth)
+    );
+
+  if(filtered.length === 0){
+
+    alert(`Belum ada transaksi bulan ${currentMonth}`);
+
+    return;
+  }
+
+  let csvContent =
+    "Tanggal,Nama,Kategori,Jenis,Nominal\\n";
+
+  filtered.forEach(function(txn){
+
+    csvContent +=
+      `${txn.date},${txn.name},${txn.category},${txn.type},${txn.amount}\\n`;
+
+  });
+
+  const blob = new Blob(
+    [csvContent],
+    { type:'text/csv;charset=utf-8;' }
+  );
+
+  const link = document.createElement('a');
+
+  const url = URL.createObjectURL(blob);
+
+  link.setAttribute('href', url);
+
+  link.setAttribute(
+    'download',
+    `transaksi-${currentMonth}.csv`
+  );
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+}
       calculateEverything();
     } else {
       err.classList.add('show');
