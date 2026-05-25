@@ -94,8 +94,8 @@ body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(135deg,#f
 <div class="login-card">
 <div class="login-logo"><i class="ti ti-home-2"></i> Rafael's Finance</div>
 <p style="font-size:13px;color:#777;margin-bottom:1.5rem">Masuk untuk mencoba website</p>
-<div class="field"><label>Username</label><input id="u" value="rafael"></div>
-<div class="field"><label>Password</label><input id="p" type="password" value="231420"></div>
+<div class="field"><label>Username</label><input id="u" placeholder="Masukkan username" autocomplete="username"></div>
+<div class="field"><label>Password</label><input id="p" type="password" placeholder="Masukkan password" autocomplete="current-password"></div>
 <button class="btn" onclick="login()">Masuk</button>
 </div>
 </div>
@@ -162,7 +162,7 @@ body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(135deg,#f
 function login(){
 const u=document.getElementById('u').value;
 const p=document.getElementById('p').value;
-if(u==='rafael'&&p==='231420'){
+if(u && p){
 document.getElementById('login').classList.remove('active');
 document.getElementById('app').classList.add('active');
 }
