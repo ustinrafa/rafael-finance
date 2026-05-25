@@ -3,9 +3,53 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Rafael's Finance</title>
+<title>Rafael's Finance Preview</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js">document.getElementById('themeToggle').addEventListener('click',()=>{
+const body=document.body;
+if(body.classList.contains('dark')){
+body.classList.remove('dark');
+document.getElementById('themeToggle').innerHTML='🌙 Dark Mode';
+}else{
+body.classList.add('dark');
+document.getElementById('themeToggle').innerHTML='☀️ Light Mode';
+}
+});
+
+const style=document.createElement('style');
+style.innerHTML=`
+.dark{
+background:linear-gradient(135deg,#0f172a,#111827);
+color:#fff;
+}
+.dark .card,
+.dark .sidebar,
+.dark .profile,
+.dark .login-card{
+background:rgba(17,24,39,.75)!important;
+color:#fff;
+border:1px solid rgba(255,255,255,.08);
+}
+.dark .nav{
+background:#1e293b;
+color:#cbd5e1;
+}
+.dark .nav.active{
+background:linear-gradient(135deg,#2563eb,#3b82f6);
+color:#fff;
+}
+.dark .field input{
+background:#0f172a;
+border-color:#334155;
+color:#fff;
+}
+.dark p,.dark .metric-title{
+color:#cbd5e1!important;
+}
+`;
+document.head.appendChild(style);
+
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(135deg,#f5f7fb,#eef2f7);color:#1a1a1a;overflow-x:hidden}
@@ -68,6 +112,8 @@ body{font-family:Inter,system-ui,sans-serif;background:linear-gradient(135deg,#f
 </div>
 
 <div class="main">
+<button id="themeToggle" style="position:fixed;top:20px;right:20px;z-index:999;background:#fff;border:none;padding:12px 14px;border-radius:14px;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.08);font-weight:700">🌙 Dark Mode</button>
+
 <div class="topbar">
 <div>
 <h1 style="font-size:34px;font-weight:800">Dashboard Keuangan</h1>
