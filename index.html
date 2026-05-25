@@ -845,8 +845,9 @@ body{
     calculateEverything();
   };
  
- <script>
-  
+<script>
+  // script utama website kamu
+
 function downloadExcel(){
 
   let csv = [];
@@ -867,7 +868,7 @@ function downloadExcel(){
 
   });
 
-  const csvContent = csv.join("\n");
+  const csvContent = csv.join("\\n");
 
   const blob = new Blob([csvContent], {
     type: "text/csv;charset=utf-8;"
@@ -881,14 +882,14 @@ function downloadExcel(){
 
   const today = new Date();
 
-  const month = today.toLocaleString('id-ID', { month: 'long' });
+  const month = today.toLocaleString('id-ID', {
+    month: 'long'
+  });
 
   link.setAttribute(
     "download",
     `transaksi-${month}.csv`
   );
-
-  link.style.visibility = 'hidden';
 
   document.body.appendChild(link);
 
